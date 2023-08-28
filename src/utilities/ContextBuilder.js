@@ -1,11 +1,11 @@
 import * as dotenv from 'dotenv';
-import moment from 'moment';
 import { v4 as uuid } from 'uuid';
+import { getFormattedTimestamp } from './CurrentTimestamp.js';
 
 dotenv.config();
 
 const getContext = (action) => ({
-  domain: 'nic2004:60221',
+  domain: 'ONDC:TRV10',
   country: 'IND',
   city: 'std:080',
   action,
@@ -14,7 +14,7 @@ const getContext = (action) => ({
   bap_uri: process.env.BUYER_APP_URL,
   transaction_id: uuid(),
   message_id: uuid(),
-  timestamp: moment().format(),
+  timestamp: getFormattedTimestamp(),
 });
 
 const getSubscriberContext = () => ({
@@ -25,7 +25,7 @@ const getSubscriberContext = () => ({
 
 const getContextWithContext = (action, context) => ({
   ...context,
-  domain: 'nic2004:60221',
+  domain: 'ONDC:TRV10',
   country: 'IND',
   city: 'std:080',
   action,
@@ -34,7 +34,7 @@ const getContextWithContext = (action, context) => ({
   bap_uri: process.env.BUYER_APP_URL,
   transaction_id: uuid(),
   message_id: uuid(),
-  timestamp: moment().format(),
+  timestamp: getFormattedTimestamp(),
 });
 
 export default {

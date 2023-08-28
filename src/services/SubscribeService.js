@@ -73,7 +73,7 @@ const subscribe = async (message) => {
     },
     message: {
       request_id: process.env.REQUEST_ID,
-      timestamp: '2023-08-24T13:32:54.101Z',
+      timestamp: '2023-08-28T09:45:54.101Z',
       entity: {
         gst: {
           legal_entity_name: 'redBus-Preprod',
@@ -93,13 +93,13 @@ const subscribe = async (message) => {
         email_id: 'yash.bansal@redbus.com',
         mobile_no: '8619218273',
         country: 'IND',
-        subscriber_id: 'ondc-stage.redbus.in:8080',
-        unique_key_id: '27baa06d-f90a-486c-85e5-cc621b787f04',
+        subscriber_id: 'ondc-stage.redbus.in',
+        unique_key_id: '27baa06d-f90a-486c-85e5-cc621b787f07',
         callback_url: '/',
         key_pair: {
           signing_public_key: 'V0FpSG/WQWgujxwyjsER8VpDPNTGCkYyk1pC8xMT4oQ=',
           encryption_public_key: 'MCowBQYDK2VuAyEA0omzfFfum7owKu/xAXWu+GD9qr6X6wUOIEyPCm7Qkww=',
-          valid_from: '2023-08-24T13:25:54.101Z',
+          valid_from: '2023-08-28T09:25:54.101Z',
           valid_until: '2030-07-08T13:44:54.101Z',
         },
       },
