@@ -20,7 +20,15 @@ import SubscribeController from './controllers/SubscribeController';
 import OnSubscribeController from './controllers/OnSubscribeController';
 import SignatureHelper from './utilities/SignVerify/SignatureHelper';
 
-dotenv.config();
+if (process.env.NODE_ENV === 'DEVELOPMENT') {
+  dotenv.config({
+    path: 'local.env',
+  });
+} else {
+  dotenv.config({
+    path: 'prod.env',
+  });
+}
 process.env.REQUEST_ID = uuid();
 
 const app = express();
@@ -75,9 +83,10 @@ const registerVerificationPage = async (application) => {
       process.env.REQUEST_ID,
       process.env.PRIVATE_KEY,
     );
-    res.status(200).render('ondc-site-verification', {
-      SIGNED_UNIQUE_REQ_ID: signedRequestId,
-    });
+    res.status(200)
+      .render('ondc-site-verification', {
+        SIGNED_UNIQUE_REQ_ID: signedRequestId,
+      });
   });
 };
 

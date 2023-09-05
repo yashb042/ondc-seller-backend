@@ -16,7 +16,7 @@ const doPost = async (url, body) => {
     method: 'post',
     body,
     headers: {
-      'X-Gateway-Authorization': authHeaderValue,
+      Authorization: authHeaderValue,
       'Content-Type': 'application/json',
     },
   });
