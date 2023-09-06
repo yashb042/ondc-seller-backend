@@ -1,13 +1,15 @@
 import sodium from 'libsodium-wrappers';
 import LoggingService from '../../services/LoggingService';
 import AuthHeaderSplitter from './AuthHeaderSplitter';
+// import 'blake2';
 
 const logger = LoggingService.getLogger('SignatureHelper');
 
 const getCreatedAndExpires = () => {
   const created = Math.floor(
     new Date().getTime() / 1000 - 1 * 60,
-  ).toString();
+  )
+    .toString();
   const expires = (
     parseInt(created, 10) + 1 * 60 * 60).toString();
 
@@ -30,6 +32,7 @@ const createSignedData = (data, privateKey) => {
 
 const createSignature = async (body, createdAndExpiresValue, privateKey) => {
   await sodium.ready;
+  // blake2.createHash(
   const digest = sodium.crypto_generichash(64, sodium.from_string(body));
   const digestBase64 = sodium.to_base64(digest, sodium.base64_variants.ORIGINAL);
   const signingString = concatinateSignature(
