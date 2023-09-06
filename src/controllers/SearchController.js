@@ -12,13 +12,13 @@ const searchResult = (messageId, res) => {
 
 const search = async (req, res) => {
   const context = await SearchService.search(req.body);
-  // res.send(context);
-
-  // Call on_search myself
-  await onSearchFunc(onSearchRequest, res);
-
-  // sleep for 1 sec
-  setTimeout(() => SearchService.searchResult(context.message_id, res), 1000);
+  res.send(context);
+  //
+  // // Call on_search myself
+  // await onSearchFunc(onSearchRequest, res);
+  //
+  // // sleep for 1 sec
+  // setTimeout(() => SearchService.searchResult(context.message_id, res), 1000);
 };
 
 export default {

@@ -5,7 +5,7 @@ import genericResponse from '../utilities/GenericResponse';
 // import LookUpService from '../services/LookUpService';
 //
 // const BecknGateway = 'BG';
-//TODO - add these back
+// TODO - add these back
 
 const onSearchFunc = async (req, res) => {
   const logger = LoggingService.getLogger('OnSearchController');
