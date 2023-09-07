@@ -1,3 +1,5 @@
+#!/bin/bash
+
 docker network inspect ondc-network --format {{.Id}} 2>/dev/null || docker network create ondc-network
 if [ "$NODE_ENV" = "DEVELOPMENT" ]; then
     ENV_FILE="local.env"
