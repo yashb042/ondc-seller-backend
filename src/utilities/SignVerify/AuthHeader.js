@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import LoggingService from '../../services/LoggingService';
 import SignatureHelper from './SignatureHelper';
 
