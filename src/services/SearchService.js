@@ -13,7 +13,7 @@ const search = async (message) => {
 
   logger.info(`Using Default Response for ${context.messageId}`);
 
-  const url = `${process.env.GATEWAY_URL}/search`;
+  const url = `${process.env.SEARCH_URL}/search`;
   const searchRequest = {
     context,
     message,

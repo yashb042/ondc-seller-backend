@@ -2,20 +2,22 @@
 
 docker network inspect ondc-network --format {{.Id}} 2>/dev/null || docker network create ondc-network
 if [ "$NODE_ENV" = "DEVELOPMENT" ]; then
-    ENV_FILE="local.env"
+  ENV_FILE="local.env"
+elif [ "$NODE_ENV" = "PRODUCTION" ]; then
+  ENV_FILE="prod.env"
 else
-    ENV_FILE="prod.env"
+  ENV_FILE="preprod.env"
 fi
-docker build -t mobility-sample-bap:latest .
+
+docker build -t mobility-sample-bap:latest /home/ubuntu/ondc-frontend/.
 docker stop mobility-sample-bap || true && docker rm mobility-sample-bap || true
 
 docker run --network=ondc-network -p 2010:2010 --name mobility-sample-bap --env-file "$ENV_FILE" -d mobility-sample-bap:latest
 
-
 curl --location 'http://localhost:2010/on_search' \
---header 'Content-Type: application/json' \
---header 'Cookie: JSESSIONID=14bfpwji3vpdz14g3yqu7vh3nl' \
---data '{
+  --header 'Content-Type: application/json' \
+  --header 'Cookie: JSESSIONID=14bfpwji3vpdz14g3yqu7vh3nl' \
+  --data '{
   "context": {
     "country": "IND",
     "bpp_uri": "https://api.example-bpp.in/path/to/url",
