@@ -81,7 +81,7 @@ const registerVerificationPage = async (application) => {
   application.get('/ondc-site-verification.html', async (req, res) => {
     const signedRequestId = await SignatureHelper.createSignedData(
       process.env.REQUEST_ID,
-      process.env.PRIVATE_KEY,
+      process.env.SIGNING_PRIVATE_KEY,
     );
     res.status(200)
       .render('ondc-site-verification', {

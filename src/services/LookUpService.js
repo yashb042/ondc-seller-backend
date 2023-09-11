@@ -1,16 +1,20 @@
-import Api from '../api/Api';
+// import Api from '../api/Api';
 import Cache from '../utilities/Cache';
 import LoggingService from './LoggingService';
 
-const REGISTRY_URL = `${process.env.REGISTRY_URL}/lookup`;
+// const REGISTRY_URL = `${process.env.REGISTRY_URL}/lookup`;
 const logger = LoggingService.getLogger('LookUpService');
 
-const lookUpPublicKey = async (request) => {
-  const response = await Api.doPost(REGISTRY_URL, request);
-  const responseJson = await response.json();
-  logger.debug(`the looked up publickey is: ${responseJson[0].signing_public_key}`);
-  return responseJson[0].signing_public_key;
-};
+// TODO - confirm if ondc signing public key to be used or my sigining public key to be used
+// For now changing the code to use ondc signing public key
+// const lookUpPublicKey = async (request) => {
+//   const response = await Api.doPost(REGISTRY_URL, request);
+//   const responseJson = await response.json();
+//   logger.debug(`the looked up publickey is: ${responseJson[0].signing_public_key}`);
+//   return responseJson[0].signing_public_key;
+// };
+
+const lookUpPublicKey = process.env.ONDC_SIGNING_PUBLIC_KEY;
 
 const getPublicKey = async (type) => {
   const cachekey = `publicKey - ${type};`;

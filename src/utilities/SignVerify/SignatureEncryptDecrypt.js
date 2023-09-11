@@ -3,10 +3,6 @@ import LoggingService from '../../services/LoggingService.js';
 
 const logger = LoggingService.getLogger('SignatureEncryptDecrypt');
 
-const PRIVATE_KEY_CRYPTO = 'MC4CAQAwBQYDK2VuBCIEIMAuxrmkRPEp0oJlZtUi116bT6GvvXIUScTtItJX9elB';
-// const PUBLIC_KEY_CRYPTO = 'MCowBQYDK2VuAyEA0omzfFfum7owKu/xAXWu+GD9qr6X6wUOIEyPCm7Qkww=';
-const PUBLIC_KEY_ONDC = 'MCowBQYDK2VuAyEAa9Wbpvd9SsrpOZFcynyt/TO3x0Yrqyys4NUGIvyxX2Q=';
-
 // Encrypt using AES-256-ECB
 // function encryptAES256ECB() {
 //   // const plaintext = '4977f4b6-437b-4328-af2a-5072ef6c8d66';
@@ -43,13 +39,13 @@ function decryptAES256ECB(encrypted) {
   logger.info('Encrypted crypto key received:', encrypted);
 
   const privateKey1 = crypto.createPrivateKey({
-    key: Buffer.from(PRIVATE_KEY_CRYPTO, 'base64'),
+    key: Buffer.from(process.env.PRIVATE_KEY_CRYPTO, 'base64'),
     format: 'der',
     type: 'pkcs8',
   });
 
   const publicKey2 = crypto.createPublicKey({
-    key: Buffer.from(PUBLIC_KEY_ONDC, 'base64'),
+    key: Buffer.from(process.env.ONDC_ENCRYPTION_PUBLIC_KEY, 'base64'),
     format: 'der',
     type: 'spki',
   });

@@ -7,7 +7,7 @@ const doPost = async (url, body) => {
 
   logger.debug(`Posting to ${url} with Content ${body}`);
 
-  const privateKey = `${process.env.PRIVATE_KEY}`;
+  const privateKey = `${process.env.SIGNING_PRIVATE_KEY}`;
   const authHeaderValue = await authHeader
     .generateAuthorizationHeaderValue(body, privateKey);
   logger.debug(`Header Value: ${authHeaderValue}`);
