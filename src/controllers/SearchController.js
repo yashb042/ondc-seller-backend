@@ -1,7 +1,9 @@
 import SearchService from '../services/SearchService';
 
-const searchResult = (messageId, res) => {
-  const searchResponse = SearchService.getSearchResult(messageId);
+const searchResult = async (req, res) => {
+  // const messageId = req.query.message_id;
+  // const searchResponse = await SearchService.getSearchResult(req.query.message_id);
+  const searchResponse = await SearchService.getSearchResult('21e54d3c-9c3b-47c1-aa3b-b0e7b20818ee');
   if (searchResponse) {
     return res.send(searchResponse);
   }

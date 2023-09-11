@@ -1,6 +1,9 @@
 import NodeCache from 'node-cache';
 
-const cache = new NodeCache({ stdTTL: 120, checkperiod: 200000 });
+const cache = new NodeCache({
+  stdTTL: 0,
+  checkperiod: 200000,
+});
 
 const getCache = (cachekey) => cache.get(cachekey);
 
