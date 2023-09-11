@@ -6,7 +6,7 @@ const generateAuthorizationHeaderValue = async (body, privateKey) => {
   const createdAndExpiresValue = SignatureHelper.getCreatedAndExpires();
   const signature = await SignatureHelper.createSignature(body, createdAndExpiresValue, privateKey);
   const subscriberId = `${process.env.SUBSCRIBER_ID}`;
-  const uniqueId = '27baa06d-f90a-486c-85e5-cc621b787f07';
+  const uniqueId = `${process.env.SUBSCRIBE_UNIQUE_ID}`;
   const header = `Signature keyId="${subscriberId}|${uniqueId}|ed25519",algorithm="ed25519",created="${createdAndExpiresValue[0]}",expires="${createdAndExpiresValue[1]}",headers="(created) (expires) digest",signature="${signature}"`;
   logger.debug(`Header value ${header}`);
   return header;
