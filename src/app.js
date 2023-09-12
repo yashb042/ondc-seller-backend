@@ -1,6 +1,5 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
-import { v4 as uuid } from 'uuid';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import ConfirmController from './controllers/ConfirmController';
@@ -29,7 +28,6 @@ if (process.env.NODE_ENV === 'DEVELOPMENT') {
     path: 'prod.env',
   });
 }
-process.env.REQUEST_ID = uuid();
 
 const app = express();
 const logger = LoggingService.getLogger('App');
