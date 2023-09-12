@@ -3,8 +3,8 @@
 docker network inspect ondc-network --format {{.Id}} 2>/dev/null || docker network create ondc-network
 if [ "$NODE_ENV" = "DEVELOPMENT" ]; then
   ENV_FILE="local.env"
-elif [ "$NODE_ENV" = "PRODUCTION" ]; then
-  ENV_FILE="prod.env"
+elif [ "$NODE_ENV" = "STAGE" ]; then
+  ENV_FILE="stage.env"
 else
   ENV_FILE="preprod.env"
 fi

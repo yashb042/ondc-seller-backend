@@ -76,7 +76,8 @@ const subscribe = async (message) => {
       request_id: process.env.REQUEST_ID,
       timestamp: DateTime.now()
         .setZone('Asia/Kolkata')
-        .toISO(),
+        .toISO()
+        .replace('+05:30', 'Z'),
       entity: {
         gst: {
           legal_entity_name: 'redBus-Preprod',
@@ -104,7 +105,8 @@ const subscribe = async (message) => {
           encryption_public_key: process.env.PUBLIC_KEY_CRYPTO,
           valid_from: DateTime.now()
             .setZone('Asia/Kolkata')
-            .toISO(),
+            .toISO()
+            .replace('+05:30', 'Z'),
           valid_until: '2030-07-08T13:44:54.101Z',
         },
       },
