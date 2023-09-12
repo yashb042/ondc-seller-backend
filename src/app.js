@@ -21,11 +21,11 @@ import SignatureHelper from './utilities/SignVerify/SignatureHelper';
 
 if (process.env.NODE_ENV === 'DEVELOPMENT') {
   dotenv.config({
-    path: 'local.env',
+    path: 'stage.env',
   });
 } else {
   dotenv.config({
-    path: 'prod.env',
+    path: 'stage.env',
   });
 }
 
@@ -76,6 +76,7 @@ app.post('/subscribe', SubscribeController.subscribe);
 app.post('/on_subscribe', OnSubscribeController.onSubscribe);
 
 const registerVerificationPage = async (application) => {
+  console.log('registerVerificationPage');
   application.get('/ondc-site-verification.html', async (req, res) => {
     const signedRequestId = await SignatureHelper.createSignedData(
       process.env.REQUEST_ID,

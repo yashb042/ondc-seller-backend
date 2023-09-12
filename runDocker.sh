@@ -2,11 +2,11 @@
 
 docker network inspect ondc-network --format {{.Id}} 2>/dev/null || docker network create ondc-network
 if [ "$NODE_ENV" = "DEVELOPMENT" ]; then
-  ENV_FILE="local.env"
+  ENV_FILE="stage.env"
 elif [ "$NODE_ENV" = "STAGE" ]; then
   ENV_FILE="stage.env"
 else
-  ENV_FILE="preprod.env"
+  ENV_FILE="stage.env"
 fi
 
 docker build -t mobility-sample-bap:latest .
