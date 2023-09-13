@@ -2,6 +2,7 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { v4 as uuid } from 'uuid';
 import ConfirmController from './controllers/ConfirmController';
 import OnConfirmController from './controllers/OnConfirmController';
 import OnSearchController from './controllers/OnSearchController';
@@ -29,6 +30,7 @@ if (process.env.NODE_ENV === 'DEVELOPMENT') {
   });
 }
 
+process.env.REQUEST_ID = uuid();
 const app = express();
 const logger = LoggingService.getLogger('App');
 const port = process.env.BUYER_APP_PORT ? process.env.BUYER_APP_PORT : 2010;
