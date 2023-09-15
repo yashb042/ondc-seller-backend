@@ -1,33 +1,33 @@
 import * as dotenv from 'dotenv';
-import Api from '../api/Api';
+// import Api from '../api/Api';
 import ContextBuilder from '../utilities/ContextBuilder';
-import LoggingService from './LoggingService';
+// import LoggingService from './LoggingService';
 import MessageRespository from '../repo/MessageRespository';
 
 dotenv.config();
 
 const track = async (trackRequest) => {
-  const logger = LoggingService.getLogger('TrackService');
+  // const logger = LoggingService.getLogger('TrackService');
   const context = ContextBuilder.getContextWithContext('track', trackRequest.context);
-  const { message } = trackRequest;
-  const trackPayload = {
-    context,
-    message,
-  };
-  const url = `${trackRequest.context.bpp_uri}/track`;
-  logger.debug(`Track Pay Load ${trackPayload}`);
-
-  const trackResponse = await Api.doPost(url, JSON.stringify(trackPayload));
-  const responseText = await trackResponse.text();
-  logger.debug(`Response ${responseText}`);
+  // const { message } = trackRequest;
+  // const trackPayload = {
+  //   context,
+  //   message,
+  // };
+  // const url = `${trackRequest.context.bpp_uri}/track`;
+  // logger.debug(`Track Pay Load ${trackPayload}`);
+  //
+  // const trackResponse = await Api.doPost(url, JSON.stringify(trackPayload));
+  // const responseText = await trackResponse.text();
+  // logger.debug(`Response ${responseText}`);
   return context;
 };
 
 const storeTrackResult = (response) => {
-  MessageRespository.storeResult(response);
+  MessageRespository.storeResult(response, 'track');
 };
 
-const getTrackResult = (messageId) => MessageRespository.getResult(messageId);
+const getTrackResult = (messageId) => MessageRespository.getResult(messageId, 'track');
 
 export default {
   track,
