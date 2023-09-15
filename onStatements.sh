@@ -130,7 +130,7 @@ curl --location 'http://ondc-stage.redbus.in:8080/on_search' \
 }'
 
 
-curl --location 'http://ondc-stage.redbus.in:8080/on_select' \
+curl -L 'http://ondc-stage.redbus.in:8080/on_select' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: JSESSIONID=18o9jto0gf2tk1nuonu3ivioh8' \
 --data '{
