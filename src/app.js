@@ -2,6 +2,7 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+// import cors from 'cors';
 import { v4 as uuid } from 'uuid';
 import ConfirmController from './controllers/ConfirmController';
 import OnConfirmController from './controllers/OnConfirmController';
@@ -18,7 +19,9 @@ import TrackController from './controllers/TrackController';
 import OnTrackController from './controllers/OnTrackController';
 import SubscribeController from './controllers/SubscribeController';
 import OnSubscribeController from './controllers/OnSubscribeController';
+
 import SignatureHelper from './utilities/SignVerify/SignatureHelper';
+import WhatsappController from './controllers/WhatsappController';
 
 if (process.env.NODE_ENV === 'DEVELOPMENT') {
   dotenv.config({
@@ -40,6 +43,7 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 app.use(express.json());
+// app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'pug');
@@ -77,22 +81,31 @@ app.get('/track', TrackController.trackResult);
 app.post('/subscribe', SubscribeController.subscribe);
 app.post('/on_subscribe', OnSubscribeController.onSubscribe);
 
-const registerVerificationPage = async (application) => {
-  console.log('registerVerificationPage');
-  application.get('/ondc-site-verification.html', async (req, res) => {
-    const signedRequestId = await SignatureHelper.createSignedData(
-      process.env.REQUEST_ID,
-      process.env.SIGNING_PRIVATE_KEY,
-    );
-    res.status(200)
-      .render('ondc-site-verification', {
-        SIGNED_UNIQUE_REQ_ID: signedRequestId,
-      });
-  });
-};
+app.post('/on_message', WhatsappController.onMessage);
+
+const htmlFile = `
+<!--Contents of ondc-site-verification.html. -->
+<!--Please replace SIGNED_UNIQUE_REQ_ID with an actual value-->
+<html>
+  <head>
+    <meta
+      name="ondc-site-verification"
+      content="SIGNED_UNIQUE_REQ_ID"
+    />
+  </head>
+  <body>
+    ONDC Site Verification Page
+  </body>
+</html>
+`;
+
+app.get('/ondc-site-verification.html', async (req, res) => {
+  const signedContent = await SignatureHelper
+    .createSignedData(process.env.REQUEST_ID, process.env.SIGNING_PRIVATE_KEY);
+  const modifiedHTML = htmlFile.replace(/SIGNED_UNIQUE_REQ_ID/g, signedContent);
+  res.send(modifiedHTML);
+});
 
 app.listen(port, async () => {
   logger.info(`Sample BAP listening on port ${port}`);
-
-  await registerVerificationPage(app);
 });

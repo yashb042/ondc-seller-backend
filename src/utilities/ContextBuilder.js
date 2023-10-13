@@ -13,7 +13,7 @@ const getContext = (action) => ({
   bap_id: process.env.BUYER_APP_ID,
   bap_uri: process.env.BUYER_APP_URL,
   transaction_id: uuid(),
-  message_id: uuid(),
+  message_id: '21e54d3c-9c3b-47c1-aa3b-b0e7b20818ee',
   timestamp: getFormattedTimestamp(),
 });
 
@@ -33,7 +33,7 @@ const getContextWithContext = (action, context) => ({
   bap_id: process.env.BUYER_APP_ID,
   bap_uri: process.env.BUYER_APP_URL,
   transaction_id: uuid(),
-  message_id: uuid(),
+  message_id: '21e54d3c-9c3b-47c1-aa3b-b0e7b20818ee',
   timestamp: getFormattedTimestamp(),
 });
 

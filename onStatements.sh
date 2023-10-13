@@ -1,4 +1,4 @@
-curl --location 'http://ondc-stage.redbus.in:8080/on_search' \
+cul --location 'http://ondc-stage.redbus.in/on_search' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: JSESSIONID=18o9jto0gf2tk1nuonu3ivioh8' \
 --data '{
@@ -130,7 +130,7 @@ curl --location 'http://ondc-stage.redbus.in:8080/on_search' \
 }'
 
 
-curl -L 'http://ondc-stage.redbus.in:8080/on_select' \
+curl -L 'http://ondc-stage.redbus.in/on_select' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: JSESSIONID=18o9jto0gf2tk1nuonu3ivioh8' \
 --data '{
@@ -271,7 +271,7 @@ curl -L 'http://ondc-stage.redbus.in:8080/on_select' \
   }
 }'
 
-curl --location 'http://ondc-stage.redbus.in:8080/on_track' \
+curl --location 'http://ondc-stage.redbus.in/on_track' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: JSESSIONID=18o9jto0gf2tk1nuonu3ivioh8' \
 --data '{
@@ -297,7 +297,7 @@ curl --location 'http://ondc-stage.redbus.in:8080/on_track' \
   }
 }'
 
-curl --location 'http://ondc-stage.redbus.in:8080/on_confirm' \
+curl --location 'http://ondc-stage.redbus.in/on_confirm' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: JSESSIONID=18o9jto0gf2tk1nuonu3ivioh8' \
 --data-raw '{
@@ -479,7 +479,7 @@ curl --location 'http://ondc-stage.redbus.in:8080/on_confirm' \
   }
 }'
 
-curl --location 'http://ondc-stage.redbus.in:8080/on_init' \
+curl --location 'http://ondc-stage.redbus.in/on_init' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: JSESSIONID=18o9jto0gf2tk1nuonu3ivioh8' \
 --data-raw '{
@@ -648,7 +648,7 @@ curl --location 'http://ondc-stage.redbus.in:8080/on_init' \
   }
 }'
 
-curl --location 'http://ondc-stage.redbus.in:8080/on_status' \
+curl --location 'http://ondc-stage.redbus.in/on_status' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: JSESSIONID=18o9jto0gf2tk1nuonu3ivioh8' \
 --data-raw '{
