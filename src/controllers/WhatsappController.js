@@ -61,16 +61,16 @@ const onMessage = async (req, res) => {
     if (text) {
       const body = text.body.toLowerCase();
       if (body.includes('hey') || body.includes('hi') || body.includes('hello')) {
-        await sendMsg(msg.to, 'Hello, Welcome to red auto booking through WhatsApp!!');
+        await sendMsg(msg.from, 'Hello, Welcome to red auto booking through WhatsApp!!');
         return;
       }
     }
 
-    if (!userDataCache.has(msg.id)) {
-      userDataCache.set(msg.id, {});
+    if (!userDataCache.has(msg.from)) {
+      userDataCache.set(msg.from, {});
     }
 
-    const userData = userDataCache.get(msg.id);
+    const userData = userDataCache.get(msg.from);
     const time = Math.random() * (10 - 3) + 3;
 
     if (msg.contentType === 'location') {
@@ -79,6 +79,7 @@ const onMessage = async (req, res) => {
           longitude: locationBody.longitude,
           latitude: locationBody.latitude,
         };
+        await sendMsg(msg.from, 'Please share your destination WhatsApp location');
       } else if (!userData.dst) {
         userData.dst = {
           longitude: locationBody.longitude,
@@ -87,20 +88,18 @@ const onMessage = async (req, res) => {
         const providers = search[0].message.catalog['bpp/descriptor'];
         const { price } = providers.item[0];
 
-        await sendMsg(msg.to, `Hurray, We found an auto for you!!\nIt is ${time} mins away and cost is ${price}, please confirm by typing yes!!`);
+        await sendMsg(msg.from, `Hurray, We found an auto for you!!\nIt is ${time} mins away and cost is ${price}, please confirm by typing yes!!`);
       }
     } else if (!userData.src) {
-      await sendMsg(msg.to, 'Please share your source WhatsApp location');
-    } else if (!userData.dst) {
-      await sendMsg(msg.to, 'Please share your destination WhatsApp location');
+      await sendMsg(msg.from, 'Please share your source WhatsApp location');
     } else if (text.body.toLowerCase() === 'yes') {
       const price = confirm[0].message.order.quote.value;
       const otp = confirm[0].message.order.fulfillment.start.authorization.token;
 
-      await sendMsg(msg.to, `Your auto is on the way!!\nIt is ${time} away and price is ${price} and OTP is ${otp}!!`);
+      await sendMsg(msg.from, `Your auto is on the way!!\nIt is ${time} away and price is ${price} and OTP is ${otp}!!`);
     }
 
-    userDataCache.set(msg.id, userData);
+    userDataCache.set(msg.from, userData);
     return;
   } catch (error) {
     console.error('Error:', error);
