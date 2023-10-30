@@ -113,7 +113,7 @@ const subscribe = async (message) => {
       network_participant: [
         {
           subscriber_url: '/',
-          domain: 'ONDC:TRV10',
+          domain: process.env.NETWORK_PARTICIPANT_DOMAIN,
           type: 'buyerApp',
           msn: false,
           city_code: [
